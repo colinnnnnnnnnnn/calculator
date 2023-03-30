@@ -11,7 +11,17 @@ button {
     padding: 20px;
     border: 3px solid black;
     border-radius: 50%;
-    background-color: rgb(255, 240, 222);
+    background-color: rgb(255, 225, 224);
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 3px solid black;
+    border-radius: 10%;
+    background-color: rgb(255, 188, 167);
 }
 
 .row {
