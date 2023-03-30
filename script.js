@@ -66,6 +66,8 @@ operButtons.forEach(button => {
             console.log('Oper1 = ' + oper);
             console.log('Oper2 = ' + nextOper);
 
+            console.log('Result = ' + operate(oper, Number(num), Number(nextNum)));
+
         }
 
         
@@ -74,20 +76,37 @@ operButtons.forEach(button => {
 
 
 function operate(sign, a, b) {
-    if (sign = '+') {
+
+    if (nextOper != '=') {
+        clicked2 = false;
+        nextNum = 0;
+        oper = nextOper;
+    }
+
+    else if (nextOper == '=') {
+        clicked1 = false;
+        clicked2 = false;
+        nextNum = 0;
+    }
+
+    if (sign == '+') {
+        num = add(a, b);
         return add(a, b);
     }
     
-    else if (sign = '-') {
+    else if (sign == '-') {
+        num = substract(a, b);
         return substract(a, b);
     }
 
-    else if (sign = '*') {
+    else if (sign == '*') {
+        num = multiply(a, b);
         return multiply(a, b);
     }
 
-    else if (sign = '/') {
+    else if (sign == '/') {
+        num = divide(a, b);
         return divide(a, b);
     }
-
+    
 }
