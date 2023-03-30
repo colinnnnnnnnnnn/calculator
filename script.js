@@ -45,8 +45,6 @@ numButtons.forEach(button => {
         else if (clicked2 == false) {
             nextNum = readNum(nextNum, button);
         }
-
-        
     });
 });
 
