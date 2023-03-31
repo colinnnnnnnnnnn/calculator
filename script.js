@@ -44,12 +44,12 @@ let clickedOper = false;
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
 
-        if (clickedOper == false) {
+        if (clicked1 == false) {
             num = readNum(num, button);
         }
 
         else if (clicked2 == false) {
-            clicked1 = true;
+            clickedOper = true;
             nextNum = readNum(nextNum, button);
         }
     });
@@ -57,9 +57,9 @@ numButtons.forEach(button => {
 
 operButtons.forEach(button => {
     button.addEventListener('click', () => {
-        if (clicked1 == false) {
+        if (clickedOper == false) {
             oper = readOper(oper, button);
-            clickedOper = true;
+            clicked1 = true;
         }
 
         else if (clicked2 == false) {
@@ -79,13 +79,11 @@ operButtons.forEach(button => {
     })
 });
 
-
-
 function operate(sign, a, b) {
 
     if (nextOper != '=') {
         clicked2 = false;
-        clicked1 = false;
+        clickedOper = false;
         nextNum = 0;
         oper = nextOper;
     }
@@ -130,8 +128,9 @@ clearAll.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    if (clicked1 == false) {
+    if (clickedOper == false) {
         num = 0;
+        clicked1 = false;
         display.textContent = num;
     }
 
@@ -142,8 +141,9 @@ clear.addEventListener('click', () => {
 });
 
 bspace.addEventListener('click', () => {
-    if (clicked1 == false) {
+    if (clickedOper == false) {
         num = Math.trunc(num/10);
+        clicked1 = false;
         display.textContent = num;
     }
 
