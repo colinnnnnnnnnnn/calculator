@@ -39,15 +39,17 @@ let oper = '';
 let nextOper = '';
 let clicked1 = false;
 let clicked2 = false;
+let clickedOper = false;
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
 
-        if (clicked1 == false) {
+        if (clickedOper == false) {
             num = readNum(num, button);
         }
 
         else if (clicked2 == false) {
+            clicked1 = true;
             nextNum = readNum(nextNum, button);
         }
     });
@@ -57,7 +59,7 @@ operButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (clicked1 == false) {
             oper = readOper(oper, button);
-            clicked1 = true;
+            clickedOper = true;
         }
 
         else if (clicked2 == false) {
@@ -76,6 +78,46 @@ operButtons.forEach(button => {
         }
     })
 });
+
+
+
+function operate(sign, a, b) {
+
+    if (nextOper != '=') {
+        clicked2 = false;
+        clicked1 = false;
+        nextNum = 0;
+        oper = nextOper;
+    }
+
+    else if (nextOper == '=') {
+        clicked1 = false;
+        clicked2 = false;
+        clickedOper = false;
+        nextNum = 0;
+    }
+
+    if (sign == '+') {
+        num = add(a, b);
+        return add(a, b);
+    }
+    
+    else if (sign == '-') {
+        num = substract(a, b);
+        return substract(a, b);
+    }
+
+    else if (sign == '*') {
+        num = multiply(a, b);
+        return multiply(a, b);
+    }
+
+    else if (sign == '/') {
+        num = divide(a, b);
+        return divide(a, b);
+    }
+    
+}
 
 
 clearAll.addEventListener('click', () => {
@@ -111,39 +153,3 @@ bspace.addEventListener('click', () => {
     }
 
 });
-
-function operate(sign, a, b) {
-
-    if (nextOper != '=') {
-        clicked2 = false;
-        nextNum = 0;
-        oper = nextOper;
-    }
-
-    else if (nextOper == '=') {
-        clicked1 = false;
-        clicked2 = false;
-        nextNum = 0;
-    }
-
-    if (sign == '+') {
-        num = add(a, b);
-        return add(a, b);
-    }
-    
-    else if (sign == '-') {
-        num = substract(a, b);
-        return substract(a, b);
-    }
-
-    else if (sign == '*') {
-        num = multiply(a, b);
-        return multiply(a, b);
-    }
-
-    else if (sign == '/') {
-        num = divide(a, b);
-        return divide(a, b);
-    }
-    
-}

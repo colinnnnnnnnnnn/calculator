@@ -25,7 +25,7 @@ button {
     gap: 10px;
     padding: 10px;
     border: 3px solid black;
-    border-radius: 10%;
+    border-radius: 40px;
     background-color: rgb(255, 188, 167);
 }
 
