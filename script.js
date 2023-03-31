@@ -28,6 +28,9 @@ function readOper(oper, button) {
 
 const numButtons = document.querySelectorAll('#number');
 const operButtons = document.querySelectorAll('#operator');
+const clearAll = document.querySelector('#clear-all');
+const clear = document.querySelector('#clear');
+const bspace = document.querySelector('#bspace');
 const display = document.querySelector('#display');
 
 let num = 0;
@@ -71,9 +74,17 @@ operButtons.forEach(button => {
 
 
         }
-
-        
     })
+});
+
+
+clearAll.addEventListener('click', () => {
+    num = 0;
+    nextNum = 0;
+    clicked1 = false;
+    clicked2 = false;
+
+    display.textContent = 0;
 });
 
 
