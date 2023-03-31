@@ -87,6 +87,17 @@ clearAll.addEventListener('click', () => {
     display.textContent = 0;
 });
 
+clear.addEventListener('click', () => {
+    if (clicked1 == false) {
+        num = 0;
+        display.textContent = num;
+    }
+
+    else if (clicked2 == false) {
+        nextNum = 0;
+        display.textContent = nextNum;
+    }
+});
 
 function operate(sign, a, b) {
 
