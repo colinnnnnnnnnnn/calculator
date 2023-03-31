@@ -17,6 +17,7 @@ function divide(a, b) {
 function readNum(num, button) {
     num *= 10;
     num += Number(button.textContent);
+    display.textContent = num;
     return num;
 }
 
@@ -27,6 +28,7 @@ function readOper(oper, button) {
 
 const numButtons = document.querySelectorAll('#number');
 const operButtons = document.querySelectorAll('#operator');
+const display = document.querySelector('#display');
 
 let num = 0;
 let nextNum = 0;
@@ -58,13 +60,15 @@ operButtons.forEach(button => {
         else if (clicked2 == false) {
             nextOper = readOper(nextOper, button);
             clicked2 = true;
+            display.textContent = operate(oper, Number(num), Number(nextNum));
 
-            console.log('Num1 = ' + num);
-            console.log('Num2 = ' + nextNum);
-            console.log('Oper1 = ' + oper);
-            console.log('Oper2 = ' + nextOper);
+            // console.log('Num1 = ' + num);
+            // console.log('Num2 = ' + nextNum);
+            // console.log('Oper1 = ' + oper);
+            // console.log('Oper2 = ' + nextOper);
 
-            console.log('Result = ' + operate(oper, Number(num), Number(nextNum)));
+            // console.log('Result = ' + operate(oper, Number(num), Number(nextNum)));
+
 
         }
 
