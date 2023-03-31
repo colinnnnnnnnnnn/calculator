@@ -17,6 +17,14 @@ button {
     border: 3px solid black;
     border-radius: 50%;
     background-color: rgb(255, 225, 224);
+    transition-duration: 0.2s;
+}
+
+button:hover {filter: brightness(95%);}
+button:active {filter: brightness(85%);}
+
+#operator {
+    background-color: rgb(255, 144, 110);
 }
 
 .main-container {

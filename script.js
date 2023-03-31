@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return (a / b).toFixed(8);
 }
 
 function readNum(num, button) {
@@ -60,23 +60,20 @@ operButtons.forEach(button => {
         if (clickedOper == false) {
             oper = readOper(oper, button);
             clicked1 = true;
+
+            operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+            button.style.filter = 'brightness(85%)';
         }
 
         else if (clicked2 == false) {
             nextOper = readOper(nextOper, button);
             clicked2 = true;
+
+            operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+            button.style.filter = 'brightness(85%)';
             display.textContent = operate(oper, Number(num), Number(nextNum));
-
-            // console.log('Num1 = ' + num);
-            // console.log('Num2 = ' + nextNum);
-            // console.log('Oper1 = ' + oper);
-            // console.log('Oper2 = ' + nextOper);
-
-            // console.log('Result = ' + operate(oper, Number(num), Number(nextNum)));
-
-
         }
-    })
+    });
 });
 
 function operate(sign, a, b) {
@@ -93,6 +90,8 @@ function operate(sign, a, b) {
         clicked2 = false;
         clickedOper = false;
         nextNum = 0;
+
+        operButtons.forEach(button => button.style.filter = 'brightness(100%)');
     }
 
     if (sign == '+') {
@@ -131,12 +130,12 @@ clear.addEventListener('click', () => {
     if (clickedOper == false) {
         num = 0;
         clicked1 = false;
-        display.textContent = num;
+        display.textContent = 0;
     }
 
     else if (clicked2 == false) {
         nextNum = 0;
-        display.textContent = nextNum;
+        display.textContent = 0;
     }
 });
 
