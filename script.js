@@ -99,6 +99,19 @@ clear.addEventListener('click', () => {
     }
 });
 
+bspace.addEventListener('click', () => {
+    if (clicked1 == false) {
+        num = Math.trunc(num/10);
+        display.textContent = num;
+    }
+
+    else if (clicked2 == false) {
+        nextNum = Math.trunc(nextNum/10);
+        display.textContent = nextNum;
+    }
+
+});
+
 function operate(sign, a, b) {
 
     if (nextOper != '=') {
