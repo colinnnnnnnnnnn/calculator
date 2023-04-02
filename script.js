@@ -132,6 +132,17 @@ function operate(sign, a, b) {
     }
 
     else if (sign == '/') {
+
+        if (b == 0) {
+            float1 = false;
+            float2 = false;
+            num = 0;
+            nextNum = 0;
+            clicked1 = false;
+            clicked2 = false;
+            return 'retard';
+        }
+
         num = divide(a, b);
         return divide(a, b);
     }
