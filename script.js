@@ -14,9 +14,18 @@ function divide(a, b) {
     return (a / b).toFixed(8);
 }
 
-function readNum(num, button) {
-    num *= 10;
-    num += Number(button.textContent);
+function readNum(num, button, float) {
+    if (!float) {
+        num *= 10;
+        num += Number(button.textContent);
+    }
+
+    else if (float && floatDigit <= 8) {
+        num += Number(button.textContent) / Math.pow(10, floatDigit);
+        num = Number(num.toFixed(floatDigit));
+        floatDigit++;
+    }
+    
     display.textContent = num;
     return num;
 }
@@ -31,6 +40,7 @@ const operButtons = document.querySelectorAll('#operator');
 const clearAll = document.querySelector('#clear-all');
 const clear = document.querySelector('#clear');
 const bspace = document.querySelector('#bspace');
+const dot = document.querySelector('#dot');
 const display = document.querySelector('#display');
 
 let num = 0;
@@ -40,17 +50,22 @@ let nextOper = '';
 let clicked1 = false;
 let clicked2 = false;
 let clickedOper = false;
+let float1 = false;
+let float2 = false;
+let floatDigit = 1;
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
 
         if (clicked1 == false) {
-            num = readNum(num, button);
+            num = readNum(num, button, float1);
+            float2 = false;
         }
 
         else if (clicked2 == false) {
             clickedOper = true;
-            nextNum = readNum(nextNum, button);
+            nextNum = readNum(nextNum, button, float2);
+            float1 = false;
         }
     });
 });
@@ -61,7 +76,6 @@ operButtons.forEach(button => {
             if (button.textContent != '=') {
                 oper = readOper(oper, button);
                 clicked1 = true;
-
             
                 operButtons.forEach(button => button.style.filter = 'brightness(100%)');
                 button.style.filter = 'brightness(85%)';    
@@ -82,6 +96,9 @@ operButtons.forEach(button => {
 });
 
 function operate(sign, a, b) {
+
+    float1 = false;
+    float2 = false;
 
     if (nextOper != '=') {
         clicked2 = false;
@@ -121,8 +138,21 @@ function operate(sign, a, b) {
     
 }
 
+dot.addEventListener('click', () => {
+    if (clicked1 == false && float1 == false) {
+        floatDigit = 1;
+        float1 = true;
+    }
+
+    else if (clicked2 == false && float2 == false) {
+        floatDigit = 1;
+        float2 = true;
+    }
+});
 
 clearAll.addEventListener('click', () => {
+    float1 = false;
+    float2 = false;
     num = 0;
     nextNum = 0;
     clicked1 = false;
@@ -137,6 +167,7 @@ clear.addEventListener('click', () => {
         num = 0;
         clicked1 = false;
         display.textContent = 0;
+        operButtons.forEach(button => button.style.filter = 'brightness(100%)');
     }
 
     else if (clicked2 == false) {
@@ -144,7 +175,9 @@ clear.addEventListener('click', () => {
         display.textContent = 0;
     }
 
-    operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+    float1 = false;
+    float2 = false;
+    
 });
 
 bspace.addEventListener('click', () => {
@@ -159,4 +192,6 @@ bspace.addEventListener('click', () => {
         display.textContent = nextNum;
     }
 
+
+    operButtons.forEach(button => button.style.filter = 'brightness(100%)');
 });
