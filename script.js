@@ -148,6 +148,8 @@ dot.addEventListener('click', () => {
         floatDigit = 1;
         float2 = true;
     }
+
+    display.textContent += '.';
 });
 
 clearAll.addEventListener('click', () => {
@@ -197,6 +199,7 @@ bspace.addEventListener('click', () => {
 
         clicked1 = false;
         display.textContent = num;
+        operButtons.forEach(button => button.style.filter = 'brightness(100%)');
     }
 
     else if (clicked2 == false) {
@@ -212,8 +215,6 @@ bspace.addEventListener('click', () => {
         }
 
         display.textContent = nextNum;
+        
     }
-
-
-    operButtons.forEach(button => button.style.filter = 'brightness(100%)');
 });
