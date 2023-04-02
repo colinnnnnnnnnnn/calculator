@@ -181,14 +181,36 @@ clear.addEventListener('click', () => {
 });
 
 bspace.addEventListener('click', () => {
+    floatDigit--;
+    
     if (clickedOper == false) {
-        num = Math.trunc(num/10);
+        let str = num.toString();
+
+        if (str[str.length - 2] != '.') {
+            num = Number(str.slice(0, -1));
+        }
+
+        else {
+            num = Number(str.slice(0, -1));
+            float1 = false;
+        }
+
         clicked1 = false;
         display.textContent = num;
     }
 
     else if (clicked2 == false) {
-        nextNum = Math.trunc(nextNum/10);
+        let str = nextNum.toString();
+
+        if (str[str.length - 2] != '.') {
+            nextNum = Number(str.slice(0, -1));
+        }
+
+        else {
+            nextNum = Number(str.slice(0, -1));
+            float2 = false;
+        }
+
         display.textContent = nextNum;
     }
 
