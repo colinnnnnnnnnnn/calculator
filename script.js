@@ -58,19 +58,24 @@ numButtons.forEach(button => {
 operButtons.forEach(button => {
     button.addEventListener('click', () => {
         if (clickedOper == false) {
-            oper = readOper(oper, button);
-            clicked1 = true;
+            if (button.textContent != '=') {
+                oper = readOper(oper, button);
+                clicked1 = true;
 
-            operButtons.forEach(button => button.style.filter = 'brightness(100%)');
-            button.style.filter = 'brightness(85%)';
+            
+                operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+                button.style.filter = 'brightness(85%)';    
+            }
         }
 
         else if (clicked2 == false) {
             nextOper = readOper(nextOper, button);
             clicked2 = true;
 
-            operButtons.forEach(button => button.style.filter = 'brightness(100%)');
-            button.style.filter = 'brightness(85%)';
+            if (button.textContent != '=') {
+                operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+                button.style.filter = 'brightness(85%)';    
+            }
             display.textContent = operate(oper, Number(num), Number(nextNum));
         }
     });
@@ -124,6 +129,7 @@ clearAll.addEventListener('click', () => {
     clicked2 = false;
 
     display.textContent = 0;
+    operButtons.forEach(button => button.style.filter = 'brightness(100%)');
 });
 
 clear.addEventListener('click', () => {
@@ -137,6 +143,8 @@ clear.addEventListener('click', () => {
         nextNum = 0;
         display.textContent = 0;
     }
+
+    operButtons.forEach(button => button.style.filter = 'brightness(100%)');
 });
 
 bspace.addEventListener('click', () => {
