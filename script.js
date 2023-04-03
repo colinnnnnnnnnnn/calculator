@@ -54,6 +54,8 @@ let float1 = false;
 let float2 = false;
 let floatDigit = 1;
 
+document.addEventListener('keydown', keyboard);
+
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
 
@@ -229,3 +231,34 @@ bspace.addEventListener('click', () => {
         
     }
 });
+
+function readKeyboard(num, e, float) {
+    if (Number(e.key) >= 0 && Number(e.key) <= 9) {
+        if (!float) {
+            num *= 10;
+            num += Number(e.key);
+        }
+    
+        else if (float && floatDigit <= 8) {
+            num += Number(e.key) / Math.pow(10, floatDigit);
+            num = Number(num.toFixed(floatDigit));
+            floatDigit++;
+        }
+    }
+    
+    display.textContent = num;
+    return num;
+} 
+
+function keyboard(e) {
+    if (clicked1 == false) {
+        num = readKeyboard(num, e, float1);
+        float2 = false;
+    }
+    
+    else if (clicked2 == false) {
+        clickedOper = true;
+        nextNum = readKeyboard(nextNum, e, float2);
+        float1 = false;
+    }
+}
