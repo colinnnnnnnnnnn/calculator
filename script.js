@@ -151,7 +151,43 @@ function operate(sign, a, b) {
     
 }
 
-dot.addEventListener('click', () => {
+dot.addEventListener('click', dotFunc);
+clearAll.addEventListener('click', clearAllFunc);
+clear.addEventListener('click', clearFunc);
+bspace.addEventListener('click', bspaceFunc);
+
+function readKeyboard(num, e, float) {
+    if (Number(e.key) >= 0 && Number(e.key) <= 9) {
+        if (!float) {
+            num *= 10;
+            num += Number(e.key);
+        }
+    
+        else if (float && floatDigit <= 8) {
+            num += Number(e.key) / Math.pow(10, floatDigit);
+            num = Number(num.toFixed(floatDigit));
+            floatDigit++;
+        }
+    }
+    
+    display.textContent = num;
+    return num;
+} 
+
+function keyboard(e) {
+    if (clicked1 == false) {
+        num = readKeyboard(num, e, float1);
+        float2 = false;
+    }
+    
+    else if (clicked2 == false) {
+        clickedOper = true;
+        nextNum = readKeyboard(nextNum, e, float2);
+        float1 = false;
+    }
+}
+
+function dotFunc() {
     if (clicked1 == false && float1 == false) {
         floatDigit = 1;
         float1 = true;
@@ -163,9 +199,9 @@ dot.addEventListener('click', () => {
     }
 
     display.textContent += '.';
-});
+}
 
-clearAll.addEventListener('click', () => {
+function clearAllFunc() {
     float1 = false;
     float2 = false;
     num = 0;
@@ -175,9 +211,9 @@ clearAll.addEventListener('click', () => {
 
     display.textContent = 0;
     operButtons.forEach(button => button.style.filter = 'brightness(100%)');
-});
+}
 
-clear.addEventListener('click', () => {
+function clearFunc() {
     if (clickedOper == false) {
         num = 0;
         clicked1 = false;
@@ -192,10 +228,9 @@ clear.addEventListener('click', () => {
 
     float1 = false;
     float2 = false;
-    
-});
+}
 
-bspace.addEventListener('click', () => {
+function bspaceFunc() {
     floatDigit--;
     
     if (clickedOper == false) {
@@ -229,36 +264,5 @@ bspace.addEventListener('click', () => {
 
         display.textContent = nextNum;
         
-    }
-});
-
-function readKeyboard(num, e, float) {
-    if (Number(e.key) >= 0 && Number(e.key) <= 9) {
-        if (!float) {
-            num *= 10;
-            num += Number(e.key);
-        }
-    
-        else if (float && floatDigit <= 8) {
-            num += Number(e.key) / Math.pow(10, floatDigit);
-            num = Number(num.toFixed(floatDigit));
-            floatDigit++;
-        }
-    }
-    
-    display.textContent = num;
-    return num;
-} 
-
-function keyboard(e) {
-    if (clicked1 == false) {
-        num = readKeyboard(num, e, float1);
-        float2 = false;
-    }
-    
-    else if (clicked2 == false) {
-        clickedOper = true;
-        nextNum = readKeyboard(nextNum, e, float2);
-        float1 = false;
     }
 }
