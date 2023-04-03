@@ -2,7 +2,7 @@ function add(a, b) {
     return a + b;
 }
 
-function substract(a, b) {
+function subtract(a, b) {
     return a - b;
 }
 
@@ -55,6 +55,7 @@ let float2 = false;
 let floatDigit = 1;
 
 document.addEventListener('keydown', keyboard);
+document.addEventListener('keydown', keyboardOper);
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -102,14 +103,14 @@ function operate(sign, a, b) {
     float1 = false;
     float2 = false;
 
-    if (nextOper != '=') {
+    if (nextOper != '=' && nextOper != 'Enter') {
         clicked2 = false;
         clickedOper = false;
         nextNum = 0;
         oper = nextOper;
     }
 
-    else if (nextOper == '=') {
+    else {
         clicked1 = false;
         clicked2 = false;
         clickedOper = false;
@@ -124,8 +125,8 @@ function operate(sign, a, b) {
     }
     
     else if (sign == '-') {
-        num = substract(a, b);
-        return substract(a, b);
+        num = subtract(a, b);
+        return subtract(a, b);
     }
 
     else if (sign == '*') {
@@ -150,11 +151,6 @@ function operate(sign, a, b) {
     }
     
 }
-
-dot.addEventListener('click', dotFunc);
-clearAll.addEventListener('click', clearAllFunc);
-clear.addEventListener('click', clearFunc);
-bspace.addEventListener('click', bspaceFunc);
 
 function readKeyboard(num, e, float) {
     if (Number(e.key) >= 0 && Number(e.key) <= 9) {
@@ -184,6 +180,38 @@ function keyboard(e) {
         clickedOper = true;
         nextNum = readKeyboard(nextNum, e, float2);
         float1 = false;
+    }
+
+}
+
+function readKeyboardOper(oper, e) {
+    oper = e.key;
+    return oper;
+}
+
+function keyboardOper(e) {
+    if (e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/' || e.key == '=' || e.key == 'Enter') {
+
+        if (clickedOper == false) {
+            if (e.key != 'Equal' && e.key != 'Enter') {
+                oper = readKeyboardOper(oper, e);
+                clicked1 = true;
+            
+                operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+
+            }
+        }
+
+        else if (clicked2 == false) {
+            nextOper = readKeyboardOper(nextOper, e);
+            clicked2 = true;
+
+            if (e.key != 'Equal' && e.key != 'Enter') {
+                operButtons.forEach(button => button.style.filter = 'brightness(100%)');
+
+            }
+            display.textContent = operate(oper, Number(num), Number(nextNum));
+        }
     }
 }
 
@@ -266,3 +294,9 @@ function bspaceFunc() {
         
     }
 }
+
+
+dot.addEventListener('click', dotFunc);
+clearAll.addEventListener('click', clearAllFunc);
+clear.addEventListener('click', clearFunc);
+bspace.addEventListener('click', bspaceFunc);
