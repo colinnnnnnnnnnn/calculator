@@ -1,3 +1,39 @@
+const numButtons = document.querySelectorAll('#number');
+const operButtons = document.querySelectorAll('#operator');
+const clearAll = document.querySelector('#clear-all');
+const clear = document.querySelector('#clear');
+const bspace = document.querySelector('#bspace');
+const dot = document.querySelector('#dot');
+const display = document.querySelector('#display');
+
+let num = 0;
+let nextNum = 0;
+let oper = '';
+let nextOper = '';
+let clicked1 = false;
+let clicked2 = false;
+let clickedOper = false;
+let float1 = false;
+let float2 = false;
+let floatDigit = 1;
+
+document.addEventListener('keydown', keyboard);
+document.addEventListener('keydown', keyboardOper);
+dot.addEventListener('click', dotFunc);
+clearAll.addEventListener('click', clearAllFunc);
+clear.addEventListener('click', clearFunc);
+bspace.addEventListener('click', bspaceFunc);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key == '.') {
+        dotFunc();
+    }
+
+    else if (e.key == 'Backspace') {
+        bspaceFunc();
+    }
+});
+
 function add(a, b) {
     return a + b;
 }
@@ -35,27 +71,7 @@ function readOper(oper, button) {
     return oper;
 }
 
-const numButtons = document.querySelectorAll('#number');
-const operButtons = document.querySelectorAll('#operator');
-const clearAll = document.querySelector('#clear-all');
-const clear = document.querySelector('#clear');
-const bspace = document.querySelector('#bspace');
-const dot = document.querySelector('#dot');
-const display = document.querySelector('#display');
 
-let num = 0;
-let nextNum = 0;
-let oper = '';
-let nextOper = '';
-let clicked1 = false;
-let clicked2 = false;
-let clickedOper = false;
-let float1 = false;
-let float2 = false;
-let floatDigit = 1;
-
-document.addEventListener('keydown', keyboard);
-document.addEventListener('keydown', keyboardOper);
 
 numButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -295,19 +311,3 @@ function bspaceFunc() {
         
     }
 }
-
-
-dot.addEventListener('click', dotFunc);
-clearAll.addEventListener('click', clearAllFunc);
-clear.addEventListener('click', clearFunc);
-bspace.addEventListener('click', bspaceFunc);
-
-document.addEventListener('keydown', (e) => {
-    if (e.key == '.') {
-        dotFunc();
-    }
-
-    else if (e.key == 'Backspace') {
-        bspaceFunc();
-    }
-});
