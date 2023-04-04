@@ -227,6 +227,7 @@ function dotFunc() {
     }
 
     display.textContent += '.';
+    
 }
 
 function clearAllFunc() {
@@ -300,3 +301,13 @@ dot.addEventListener('click', dotFunc);
 clearAll.addEventListener('click', clearAllFunc);
 clear.addEventListener('click', clearFunc);
 bspace.addEventListener('click', bspaceFunc);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key == '.') {
+        dotFunc();
+    }
+
+    else if (e.key == 'Backspace') {
+        bspaceFunc();
+    }
+});
